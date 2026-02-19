@@ -1,0 +1,7 @@
+{
+  "name": "HD Print Studio",
+  "description": "A high-definition photo editing and printing suite. Optimize your images with AI-powered tips, professional filters, and precision cropping for standard print sizes.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
