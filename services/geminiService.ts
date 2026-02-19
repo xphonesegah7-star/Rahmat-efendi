@@ -6,7 +6,7 @@ export async function getAIEnhancementTips(imageData: string): Promise<string> {
   
   const base64Data = imageData.split(',')[1];
   
-  const prompt = "Analyze this photo and provide 3 short, professional tips to optimize it for high-definition physical printing. Focus on brightness, contrast, and color balance. Keep it under 50 words total.";
+  const prompt = "Analyze this photo and provide 3 short, professional tips to optimize it for high-definition physical printing. Specifically suggest adjustments for brightness, contrast, color balance, sharpness, and vibrance where relevant. Keep it under 50 words total.";
 
   try {
     const response = await ai.models.generateContent({

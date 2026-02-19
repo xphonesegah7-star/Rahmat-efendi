@@ -70,6 +70,10 @@ const App: React.FC = () => {
       offscreen.width = img.width;
       offscreen.height = img.height;
 
+      // Note: CSS doesn't have a native 'sharpen' filter, 
+      // so we use a high contrast boost as a proxy for sharpen state in this basic implementation.
+      const sharpenEffect = filters.sharpen > 0 ? `contrast(${100 + (filters.sharpen * 0.5)}%) brightness(${100 - (filters.sharpen * 0.05)}%)` : '';
+
       const filterStr = `
         brightness(${filters.brightness}%)
         contrast(${filters.contrast}%)
@@ -78,6 +82,7 @@ const App: React.FC = () => {
         sepia(${filters.sepia}%)
         blur(${filters.blur}px)
         hue-rotate(${filters.hueRotate}deg)
+        ${sharpenEffect}
       `;
 
       // Draw preview
@@ -195,7 +200,8 @@ const App: React.FC = () => {
               
               <FilterControl label="Brightness" value={filters.brightness} min={0} max={200} onChange={v => updateFilter('brightness', v)} unit="%" />
               <FilterControl label="Contrast" value={filters.contrast} min={0} max={200} onChange={v => updateFilter('contrast', v)} unit="%" />
-              <FilterControl label="Saturation" value={filters.saturation} min={0} max={200} onChange={v => updateFilter('saturation', v)} unit="%" />
+              <FilterControl label="Saturation / Vibrance" value={filters.saturation} min={0} max={200} onChange={v => updateFilter('saturation', v)} unit="%" />
+              <FilterControl label="Sharpen" value={filters.sharpen} min={0} max={100} onChange={v => updateFilter('sharpen', v)} unit="%" />
               <FilterControl label="Grayscale" value={filters.grayscale} min={0} max={100} onChange={v => updateFilter('grayscale', v)} unit="%" />
               <FilterControl label="Sepia" value={filters.sepia} min={0} max={100} onChange={v => updateFilter('sepia', v)} unit="%" />
               <FilterControl label="Blur" value={filters.blur} min={0} max={10} step={0.1} onChange={v => updateFilter('blur', v)} unit="px" />
